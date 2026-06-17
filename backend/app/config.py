@@ -22,8 +22,12 @@ class Settings(BaseSettings):
 
 
     # MongoDB
-    MONGODB_URL: str = "mongodb://localhost:27017"
+    # Render must provide this via environment variable (MongoDB Atlas).
+    # Example:
+    # mongodb+srv://user:pass@cluster0.xxxxx.mongodb.net/ecommerce_analytics?retryWrites=true&w=majority
+    MONGODB_URL: str | None = None
     DATABASE_NAME: str = "ecommerce_analytics"
+
 
     # JWT
     # JWT signing key MUST be provided via environment variable (or .env).
@@ -60,4 +64,11 @@ settings = Settings()
 # Validate secrets at startup (prevents silently running with a wrong/empty JWT key).
 if not settings.SECRET_KEY:
     raise RuntimeError("SECRET_KEY must be set in environment variables or .env")
+
+if not settings.MONGODB_URL:
+    raise RuntimeError(
+"MONGODB_URL must be set to your MongoDB Atlas connection string (mongodb+srv://...). "
+        "If using Atlas, paste the full mongodb+srv:// URL (including username/password)."
+    )
+
 

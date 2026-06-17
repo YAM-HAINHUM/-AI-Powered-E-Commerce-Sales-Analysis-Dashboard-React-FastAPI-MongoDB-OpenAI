@@ -105,8 +105,20 @@ Open http://localhost:5173
 ### Backend (`backend/.env`)
 
 ```env
+# MongoDB Atlas (recommended)
+# Example (replace credentials/cluster and keep retryWrites + w/majority):
+# MONGODB_URL=mongodb+srv://<db_username>:<db_password>@cluster0.mstewnv.mongodb.net/ecommerce_analytics?retryWrites=true&w=majority
+# MongoDB Atlas (recommended)
+# Example:
+# MONGODB_URL=mongodb+srv://<db_username>:<db_password>@cluster0.mstewnv.mongodb.net/ecommerce_analytics?retryWrites=true&w=majority
+# For local MongoDB, use:
+# MongoDB local example
 MONGODB_URL=mongodb://localhost:27017
 DATABASE_NAME=ecommerce_analytics
+
+# MongoDB Atlas example (MongoDB Atlas `mongodb+srv://` string):
+# MONGODB_URL=mongodb+srv://<db_username>:<db_password>@cluster0.mstewnv.mongodb.net/ecommerce_analytics?retryWrites=true&w=majority
+
 SECRET_KEY=your-super-secret-key
 OPENAI_API_KEY=sk-your-key-here   # Optional — mock fallback works without it
 OPENAI_MODEL=gpt-4o-mini
