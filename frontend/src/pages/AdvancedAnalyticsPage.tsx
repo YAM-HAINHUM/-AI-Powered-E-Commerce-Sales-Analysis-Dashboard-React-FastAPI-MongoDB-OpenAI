@@ -269,7 +269,8 @@ export default function AdvancedAnalyticsPage() {
                   <Scatter
                     key={seg.segment}
                     name={seg.segment}
-                    data={scatterPoints.filter(p => p.segment === seg.segment)}
+                    data={scatterPoints.filter((p: any) => p.segment === seg.segment)}
+
                     fill={seg.color}
                   />
                 ))}

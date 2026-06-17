@@ -852,8 +852,9 @@ export default function DataUploadPage() {
 
           {/* ── Mapping + validation stage ─────────────────────────────────── */}
           {(stage === "mapping" || stage === "done") && (
-            <motion.key key="mapping"
-              initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+            <div key="mapping"
+              >
+
 
               {/* File info bar */}
               {file && (
@@ -944,9 +945,10 @@ export default function DataUploadPage() {
                   <ChevronRight className="size-4" />
                 </motion.button>
               )}
-            </motion.key>
+            </div>
           )}
         </AnimatePresence>
+
 
         {/* ── Error ─────────────────────────────────────────────────────────── */}
         <AnimatePresence>
@@ -969,8 +971,9 @@ export default function DataUploadPage() {
 
         {/* ── Results (done stage) ─────────────────────────────────────────── */}
         <AnimatePresence>
-          {stage === "done" && dataset && (
+              {stage === "done" && dataset && (
             <motion.div
+
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               className="space-y-5"

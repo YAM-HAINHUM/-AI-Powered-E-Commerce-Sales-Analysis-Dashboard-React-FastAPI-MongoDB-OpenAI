@@ -29,7 +29,10 @@ interface BubbleState {
   parallaxFactor: number;
   opacity: number;
   phase: number;
+  // blur uses a CSS class string (e.g. "blur-md")
   blur: string;
+
+
 }
 
 export const AnimatedBubblesBackground: React.FC = () => {
@@ -45,21 +48,23 @@ export const AnimatedBubblesBackground: React.FC = () => {
       const sizeType = Math.random();
       let size, parallax, opacity;
 
+      let blurClass = 'blur-md';
       if (sizeType < 0.7) {
         // Small (6-12px)
         size = Math.random() * 6 + 6;
         parallax = 1.6;
         opacity = 0.6;
-        blur = 'blur-md';
+        blurClass = 'blur-md';
       } else {
         // Medium (14-26px)
         size = Math.random() * 12 + 14;
         parallax = 1.1;
         opacity = 0.45;
-        blur = 'blur-lg';
+        blurClass = 'blur-lg';
       }
 
       bubbles.push({
+
         x: Math.random() * 100,
         y: Math.random() * 100,
         vx: (Math.random() - 0.5) * 0.04,
@@ -69,7 +74,9 @@ export const AnimatedBubblesBackground: React.FC = () => {
         parallaxFactor: parallax,
         opacity: isDark ? opacity : opacity * 0.8,
         phase: Math.random() * Math.PI * 2,
+        blur: blurClass,
       });
+
     }
     return bubbles;
   }, [isDark]);

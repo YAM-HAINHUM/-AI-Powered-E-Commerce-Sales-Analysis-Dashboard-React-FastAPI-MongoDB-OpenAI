@@ -35,8 +35,9 @@ export default function AnomaliesPage() {
         name: d.date,
         Sales: d.revenue,
         // Separate series for scatter plot markers
-        Spike: anom && anom.direction === "spike" ? d.revenue : null,
-        Drop: anom && anom.direction === "drop" ? d.revenue : null,
+                  Spike: anom && (anom as any).direction === "spike" ? d.revenue : null,
+        Drop: anom && (anom as any).direction === "drop" ? d.revenue : null,
+
         anomalyInfo: anom || null
       }
     })
@@ -138,15 +139,18 @@ export default function AnomaliesPage() {
             <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.04)" />
             <XAxis dataKey="name" tick={{ fontSize: 10, fill: "#64748b" }} />
             <YAxis tick={{ fontSize: 10, fill: "#64748b" }} tickFormatter={v => `$${(v/1000).toFixed(0)}k`} />
-            <Tooltip
+              <Tooltip
               contentStyle={TOOLTIP_STYLE}
-              formatter={(v: any, name: string) => {
-                if (name === "Sales") return [formatCurrency(Number(v)), "Daily Sales"]
-                if (name === "Spike Outlier") return [formatCurrency(Number(v)), "Positive Spike"]
-                if (name === "Drop Outlier") return [formatCurrency(Number(v)), "Critical Drop"]
-                return [v, name]
+              formatter={(v: any, name: any) => {
+                const n = typeof name === "string" ? name : ""
+                if (n === "Sales") return [formatCurrency(Number(v)), "Daily Sales"]
+                if (n === "Spike Outlier") return [formatCurrency(Number(v)), "Positive Spike"]
+                if (n === "Drop Outlier") return [formatCurrency(Number(v)), "Critical Drop"]
+                return [v, n]
               }}
+
             />
+
             <Legend wrapperStyle={{ fontSize: 11 }} />
             
             {/* Base Sales Line */}

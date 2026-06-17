@@ -3,7 +3,8 @@ import { useUserTracking } from "@/hooks/useUserTracking";
 
 export function useDashboardTracking(dashboardId: string) {
   const { trackChartClick, trackFilter, startDashboardTimer, stopDashboardTimer } = useUserTracking();
-  const timeSpentInterval = useRef<NodeJS.Timeout | null>(null);
+  const timeSpentInterval = useRef<ReturnType<typeof setInterval> | null>(null);
+
   const accumulatedTime = useRef(0);
 
   useEffect(() => {

@@ -82,8 +82,13 @@ const tooltipStyle = { background: "#0d1424", border: "1px solid rgba(255,255,25
 
 const fadeUp = {
   hidden: { opacity: 0, y: 16 },
-  visible: (i = 0) => ({ opacity: 1, y: 0, transition: { delay: i * 0.05, duration: 0.45, ease: [0.22, 1, 0.36, 1] } }),
-}
+  visible: (i: number = 0) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: i * 0.05, duration: 0.45, ease: "easeOut" as const },
+  }),
+} as const
+
 
 // ── Widget content renderer ───────────────────────────────────────────────────
 function WidgetContent({ widget, data }: { widget: Widget; data: DashboardData }) {

@@ -438,7 +438,8 @@ export default function ReportsPage() {
       format: fmt,
       generatedAt: `Just now`,
       size: fmt === "csv" ? "~120 KB" : fmt === "xlsx" ? `~${tmpl.estimatedSize}` : tmpl.estimatedSize,
-      status: "ready",
+      status: "ready" as const,
+
     }, ...prev].slice(0, 8))
   }, [])
 
